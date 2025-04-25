@@ -16,7 +16,7 @@ from email.message import EmailMessage
 import base64
 import streamlit.components.v1 as components
 
-GOOGLE_API_KEY = "AIzaSyDDmTosHLLulk4lId8Xj1LFBWh-OyjSci0"
+GOOGLE_API_KEY = "AIzaSyCpFbHXnYS0nxy7rBTiTwGwexfO75lqxSs"
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Model configuration
