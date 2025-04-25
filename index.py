@@ -145,13 +145,13 @@ nav_labels = {
         "Higher Studies": "Higher Studies with 'SDG'",
         "Home": "Sustainable Finance",
         "FAQ's": "Earn SDG badge",
-        "Support": "Support",
+        "Support": "Carbon Footprint Tracker",
         "Settings": "Settings",
         "Graph Chart": "Graph Chart",
         "Spending Analysis": "Spending Analysis",
         "Encrypted Data": "Encrypted Data",
         "Wallet": "Wallet",
-        "Credential Encryption": "Credential Encryption",
+        "Credential Encryption": "SDG News",
         "Withdraw": "Withdraw",
         "Logout": "Logout"
     },
@@ -485,13 +485,13 @@ nav_map = {
     
     "Home": "Home",
     "FAQ's": "FAQ's",
-    "Support": "Support",
+    "Support": "Carbon Footprint Tracker",
     "Settings": "Settings",
     "Graph Chart": "Graph Chart",
     "Spending Analysis": "Spending Analysis",
     "Encrypted Data": "Encrypted Data",
     "Wallet": "Wallet",
-    "Credential Encryption": "Credential Encryption", 
+    "Credential Encryption": "SDG News", 
     "Withdraw": "Withdraw", 
     "Logout": "Logout",
 }
@@ -1198,23 +1198,74 @@ elif nav_section == "Encrypted Data":
     else:
         st.write("No encrypted transactions yet.")
 
-elif nav_section == "Credential Encryption":
-    st.header("Credential Encryption")
-    st.write("Upload a text file containing user credentials to encrypt them.")
+import streamlit as st
+from cryptography.fernet import Fernet
 
-    uploaded_file = st.file_uploader("Upload Credential File", type=["txt"])
+# Categories and news data
+categories = ["Nature", "Automobile", "Education", "Health", "Technology", "Energy"]
+if "selected_category" not in st.session_state:
+    st.session_state.selected_category = "Nature"
 
-    if uploaded_file:
-        content = uploaded_file.read().decode("utf-8")
-        key = Fernet.generate_key()  
-        cipher_suite = Fernet(key)
-        encrypted_credentials = cipher_suite.encrypt(content.encode())
+news_data = {
+    "Nature": [
+        {"title": "Amazon Rainforest Restoration Begins", "content": "Reforestation efforts are replanting over 1 million native trees in the Amazon to revive biodiversity."},
+        {"title": "Ocean Cleanup Nets Record Plastic", "content": "20 tons of ocean plastic removed in the Pacific using new sustainable nets."},
+        {"title": "Bee Populations Rebounding with Wildflower Corridors", "content": "Wildflower planting across farms is helping pollinators recover."},
+        {"title": "Coral Reefs See Recovery Signs", "content": "Certain areas in the Great Barrier Reef have shown 30% coral regrowth after climate adaptation steps."},
+        {"title": "Urban Forests Improve Air Quality", "content": "Cities adding green belts are seeing lower air pollution and better public health outcomes."},
+    ],
+    "Automobile": [
+        {"title": "EV Sales Outpace Gas in EU", "content": "Electric vehicles outsold gas-powered cars in several EU countries last quarter."},
+        {"title": "India Rolls Out E-Bike Highways", "content": "Dedicated highways for e-bikes aim to cut urban emissions."},
+        {"title": "Self-Charging Cars in Testing", "content": "Solar charging panels integrated into car hoods are showing promising mileage boosts."},
+        {"title": "Recycled Tires Now Standard in Green Cars", "content": "Tire manufacturers turn to fully recycled material for new electric cars."},
+        {"title": "Battery Recycling Plants Open in Asia", "content": "New tech allows lithium batteries to be reused more efficiently."},
+    ],
+    "Education": [
+        {"title": "SDG Curriculum in 1000 Schools", "content": "Rural schools get a sustainability-focused upgrade in classroom teaching."},
+        {"title": "Digital Literacy for Girls Program Launched", "content": "New initiative trains girls in rural areas on digital tools for school and life."},
+        {"title": "Mobile Libraries Reach Remote Villages", "content": "Books on wheels now deliver learning to mountain regions weekly."},
+        {"title": "AI Tutors Being Piloted in Low-Income Areas", "content": "AI is helping students catch up in regions with teacher shortages."},
+        {"title": "UNICEF Launches Climate Education App", "content": "New app lets children explore climate science through interactive games."},
+    ],
+    "Health": [
+        {"title": "AI Assistants in Village Clinics", "content": "AI-driven health assistants are deployed in rural health posts to assist diagnosis."},
+        {"title": "Free Sanitary Products in 300 Schools", "content": "Menstrual hygiene program launches in partnership with local health units."},
+        {"title": "Nutrition Campaigns Reduce Child Stunting", "content": "Awareness drives and food packs are improving child health indicators."},
+        {"title": "Telemedicine Vans Launched", "content": "Doctors can now reach remote patients via mobile consultation units."},
+        {"title": "Malaria Vaccine Trials Expand", "content": "Africa leads the way in a new malaria vaccine showing 70% success."},
+    ],
+    "Technology": [
+        {"title": "Blockchain for Transparent Aid", "content": "Aid organizations now track donations via blockchain to ensure zero corruption."},
+        {"title": "AI Waste Sorting Deployed in Cities", "content": "Smart bins separate trash using AI to improve recycling."},
+        {"title": "Low-Cost Solar Drones to Deliver Supplies", "content": "Startups build drones to drop essentials in disaster-hit villages."},
+        {"title": "Open-Source Climate Simulators Released", "content": "Free tools help students visualize climate change impacts in their regions."},
+        {"title": "Rural Internet Towers Installed", "content": "Off-grid towers powered by wind and sun connect isolated communities."},
+    ],
+    "Energy": [
+        {"title": "Wind Farms Expand Along Coast", "content": "New wind farms power 100,000 rural homes across India."},
+        {"title": "Affordable Solar Kits for Farmers", "content": "Irrigation pumps and grain mills now run on portable solar panels."},
+        {"title": "Bioenergy from Agricultural Waste Rising", "content": "Farm waste gets converted into clean-burning gas for home use."},
+        {"title": "India’s Largest Hydroelectric Plant Opens", "content": "Hydro project powers 3 states while reducing flood risks."},
+        {"title": "Community Energy Cooperatives Take Off", "content": "Villagers now co-own microgrids supplying renewable power locally."},
+    ]
+}
 
-        st.write("Encrypted Credentials:")
-        st.text(encrypted_credentials.decode())
+# Render category buttons
+cols = st.columns(len(categories))
+for i, category in enumerate(categories):
+    if cols[i].button(category):
+        st.session_state.selected_category = category
+
+# Show articles for selected category
+st.markdown(f"### 📰 {st.session_state.selected_category} News")
+for article in news_data[st.session_state.selected_category]:
+    with st.expander(article["title"]):
+        st.write(article["content"])
 
 
-elif nav_section == "Logout":
+
+if nav_section == "Logout":
     st.header("Logout")
     st.write("You have successfully logged out.")
 
