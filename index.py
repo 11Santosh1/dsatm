@@ -1,4 +1,4 @@
-#for BGSCET hackathon by team CODESMITHS...Had a wonderfull experience
+#for DSATM hackathon by team CODESMITHS...Had a wonderfull experience
 import streamlit as st
 from phe import paillier
 import time
@@ -141,9 +141,9 @@ if mode == "E-book":
     )
 nav_labels = {
     "English": {
-        "Primary": "Primary",
-        "Higher Studies": "Higher Studies",
-        "Home": "Finance",
+        "Primary": "Primary 'SDG'",
+        "Higher Studies": "Higher Studies with 'SDG'",
+        "Home": "Sustainable Finance",
         "FAQ's": "FAQ's",
         "Support": "Support",
         "Settings": "Settings",
@@ -174,9 +174,9 @@ nav_labels = {
 #adding labels
 labels = {
     "English": {
-        "edu_advice": "📚 Get advice in specific education categories",
+        "edu_advice": "📚 Get advice in specific SDG education categories",
         "choose_category": "Choose a Category:",
-        "ask_question": "Career Guidance / real time study evalution",
+        "ask_question": "Career Guidance / real time study evalution with SUSTAINABLE DEVELOPMENT GOALS",
         "get_answer": "Get Answer",
         "warning": "Please enter a question.",
         "generating": "Generating response...",
@@ -344,7 +344,7 @@ else:
 st.write(f"Total Network Traffic: {network_traffic:.2f} MB")
 
 
-st.title("SAHAYOGI – Empowering Rural Education")
+st.title("SAHAYOGI – Integrating SDG with Education")
 st.write("Welcome to the platform where learning meets innovation for every rural student")
 read_aloud_button()
 
@@ -565,11 +565,46 @@ elif nav_section == "Primary":
         st.write("Welcome to the Primary Education Content Section.")
 
         st.markdown("""
-        ### 🧠 Learn Basic Concepts
+        ### 🧠 Learn Basic Concepts of SDG
         - **Alphabets** (A-Z)
         - **Numbers** (1-100)
         - **Colors & Shapes**
         - **Basic Addition/Subtraction**
+        - **No Poverty**
+        - **End poverty in all its forms everywhere**
+- **Zero Hunger**
+        - **End hunger, achieve food security, and promote sustainable agriculture**
+- **Good Health and Well-being**
+        - **Ensure healthy lives and promote well-being for all**
+- **Quality Education**
+        - **Ensure inclusive and equitable education for all**
+- **Gender Equality**
+        - **Achieve gender equality and empower all women and girls**
+- **Clean Water and Sanitation**
+        - **Ensure availability and sustainable management of water and sanitation**
+- **Affordable and Clean Energy**
+        - **Ensure access to sustainable and modern energy**
+- **Decent Work and Economic Growth**
+        - **Promote sustained economic growth and productive employment**
+- **Industry, Innovation, and Infrastructure**
+        - **Build resilient infrastructure and promote innovation**
+- **Reduced Inequalities**
+        - **Reduce inequality within and among countries**
+- **Sustainable Cities and Communities**
+        - **Make cities inclusive, safe, and sustainable**
+- **Responsible Consumption and Production**
+        - **Ensure sustainable consumption and production patterns**
+- **Climate Action**
+        - **Take urgent action to combat climate change**
+- **Life Below Water**
+        - **Conserve oceans and marine resources**
+- **Life on Land**
+        - **Protect terrestrial ecosystems and halt biodiversity loss**
+- **Peace, Justice and Strong Institutions**
+        - **Promote peaceful societies and access to justice**
+- **Partnerships for the Goals**
+        - **Strengthen implementation through global partnerships**
+
 
         Use this space to make early learning fun and interactive.
         """)
@@ -718,39 +753,218 @@ elif nav_section == "Wallet":
     else:
         st.write("No deposits made yet.")
 
-elif nav_section == "FAQ's":
-    st.header("Heath and Hygiene")
-    st.write("""
-    1. Personal Hygiene – Bathe daily to keep your body clean and odor-free.
+import streamlit as st
 
-2. Oral Hygiene – Brush twice a day and floss regularly to prevent tooth decay.
+# Navigation section
+if nav_section == "FAQ's":
+    st.header("Sustainable Development Goals (SDG) Quiz 🌍")
 
-3. Hand Hygiene – Wash hands before eating and after using the toilet.
+    sdg_questions = [
+        {
+            "question": "1. What is the main aim of SDG 1?",
+            "options": [
+                "Zero Hunger",
+                "No Poverty",
+                "Quality Education",
+                "Good Health and Well-being"
+            ],
+            "answer": "No Poverty"
+        },
+        {
+            "question": "2. SDG 2 is focused on:",
+            "options": [
+                "Ending poverty",
+                "Ensuring clean water",
+                "Zero Hunger",
+                "Climate action"
+            ],
+            "answer": "Zero Hunger"
+        },
+        {
+            "question": "3. What does SDG 3 aim to achieve?",
+            "options": [
+                "Clean energy",
+                "Innovation and infrastructure",
+                "Healthy lives and well-being",
+                "Reduced inequalities"
+            ],
+            "answer": "Healthy lives and well-being"
+        },
+        {
+            "question": "4. Which goal ensures inclusive and equitable education?",
+            "options": [
+                "SDG 3",
+                "SDG 4",
+                "SDG 8",
+                "SDG 5"
+            ],
+            "answer": "SDG 4"
+        },
+        {
+            "question": "5. What is SDG 5 about?",
+            "options": [
+                "Gender Equality",
+                "Sustainable cities",
+                "Affordable energy",
+                "Climate Action"
+            ],
+            "answer": "Gender Equality"
+        },
+        {
+            "question": "6. SDG 6 promotes:",
+            "options": [
+                "Clean water and sanitation",
+                "Economic growth",
+                "Reduced inequalities",
+                "Marine life protection"
+            ],
+            "answer": "Clean water and sanitation"
+        },
+        {
+            "question": "7. Access to modern energy is targeted by:",
+            "options": [
+                "SDG 7",
+                "SDG 10",
+                "SDG 11",
+                "SDG 16"
+            ],
+            "answer": "SDG 7"
+        },
+        {
+            "question": "8. SDG 8 is about:",
+            "options": [
+                "Peace and justice",
+                "Economic growth and decent work",
+                "Climate change",
+                "Life on land"
+            ],
+            "answer": "Economic growth and decent work"
+        },
+        {
+            "question": "9. Innovation and infrastructure development falls under:",
+            "options": [
+                "SDG 5",
+                "SDG 9",
+                "SDG 4",
+                "SDG 13"
+            ],
+            "answer": "SDG 9"
+        },
+        {
+            "question": "10. Which SDG aims to reduce inequalities within and among countries?",
+            "options": [
+                "SDG 15",
+                "SDG 13",
+                "SDG 10",
+                "SDG 2"
+            ],
+            "answer": "SDG 10"
+        },
+        {
+            "question": "11. What is the focus of SDG 11?",
+            "options": [
+                "Sustainable cities and communities",
+                "Life below water",
+                "Gender Equality",
+                "No poverty"
+            ],
+            "answer": "Sustainable cities and communities"
+        },
+        {
+            "question": "12. What is SDG 12 about?",
+            "options": [
+                "Climate Action",
+                "Responsible consumption and production",
+                "Clean Water",
+                "Peace and Justice"
+            ],
+            "answer": "Responsible consumption and production"
+        },
+        {
+            "question": "13. Which SDG calls for urgent action to combat climate change?",
+            "options": [
+                "SDG 1",
+                "SDG 13",
+                "SDG 6",
+                "SDG 8"
+            ],
+            "answer": "SDG 13"
+        },
+        {
+            "question": "14. SDG 14 is focused on:",
+            "options": [
+                "Protecting life on land",
+                "Clean energy",
+                "Conserving life below water",
+                "Gender equality"
+            ],
+            "answer": "Conserving life below water"
+        },
+        {
+            "question": "15. What does SDG 15 focus on?",
+            "options": [
+                "Protecting terrestrial ecosystems",
+                "Reducing plastic use",
+                "Promoting innovation",
+                "Inclusive education"
+            ],
+            "answer": "Protecting terrestrial ecosystems"
+        },
+        {
+            "question": "16. SDG 16 promotes:",
+            "options": [
+                "Peace, justice and strong institutions",
+                "Clean water",
+                "Sustainable cities",
+                "Gender equality"
+            ],
+            "answer": "Peace, justice and strong institutions"
+        },
+        {
+            "question": "17. What is the aim of SDG 17?",
+            "options": [
+                "Promote global partnerships",
+                "Improve health systems",
+                "Promote agriculture",
+                "Develop software"
+            ],
+            "answer": "Promote global partnerships"
+        }
+    ]
 
-4. Nail Hygiene – Keep nails trimmed and clean to avoid germs and infections.
+    # Session state initialization
+    if "sdg_score" not in st.session_state:
+        st.session_state.sdg_score = 0
+        st.session_state.sdg_answers = [None] * len(sdg_questions)
 
-5. Hair Care – Wash hair regularly to avoid lice and dandruff.
+    # Display each MCQ
+    for i, q in enumerate(sdg_questions):
+        st.subheader(q["question"])
+        selected = st.radio("Choose one:", q["options"], key=f"sdg_q{i}", index=None)
 
-6. Foot Hygiene – Clean feet daily and wear breathable shoes to prevent fungus.
 
-7. Clothing Hygiene – Wear clean clothes and change undergarments daily.
+        if st.session_state.sdg_answers[i] is None:
+            if selected == q["answer"]:
+                st.session_state.sdg_score += 1
+            st.session_state.sdg_answers[i] = selected
 
-8. Menstrual Hygiene – Use clean sanitary products and change them regularly.
+    # Submit button
+    if st.button("Submit SDG Quiz"):
+        st.success(f"🎉 Your Score: {st.session_state.sdg_score} / {len(sdg_questions)}")
 
-9. Toilet Hygiene – Always flush and wash hands after using the restroom.
+        if st.session_state.sdg_score == len(sdg_questions):
+            st.balloons()
+            st.markdown("### 🏅 SDG Mastery Badge Unlocked!")
+        elif st.session_state.sdg_score >= len(sdg_questions) // 2:
+            st.markdown("### 🥈 Great effort! You’ve got SDG knowledge.")
+        else:
+            st.markdown("### 💡 Keep learning and explore more about SDGs!")
 
-10. Food Hygiene – Eat fresh, well-cooked food and avoid uncovered street food.
+        if st.button("🔄 Retake Quiz"):
+            st.session_state.sdg_score = 0
+            st.session_state.sdg_answers = [None] * len(sdg_questions)
+            st.experimental_rerun()
 
-11. Water Hygiene – Drink clean, filtered or boiled water to prevent diseases.
-
-12. Home Hygiene – Keep living spaces clean, dust-free, and well-ventilated.
-
-13. Waste Management – Dispose of garbage properly and segregate waste.
-
-14. Sleep Hygiene – Maintain regular sleep patterns and get enough rest.
-
-15. Mental Hygiene – Practice stress management, meditation, and stay positive.
-    """)
 #upgraded
 elif nav_section == "Support":
     st.header("Support")
