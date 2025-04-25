@@ -18,7 +18,7 @@ import base64
 GOOGLE_API_KEY = "AIzaSyDDmTosHLLulk4lId8Xj1LFBWh-OyjSci0"
 genai.configure(api_key=GOOGLE_API_KEY)
 
-# Model configuration
+# Model configurations
 generation_config = {
     "temperature": 0,
     "top_p": 0.95,
