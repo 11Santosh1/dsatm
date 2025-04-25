@@ -1,3 +1,4 @@
+#for BGSCET hackathon by team CODESMITHS...Had a wonderfull experience
 import streamlit as st
 from phe import paillier
 import time
@@ -170,6 +171,7 @@ nav_labels = {
         "Logout": "ಲಾಗ್ ಔಟ್"
     }
 }
+#adding labels
 labels = {
     "English": {
         "edu_advice": "📚 Get advice in specific education categories",
@@ -291,6 +293,7 @@ def decrypt_data(encrypted_data):
         return st.session_state.private_key.decrypt(encrypted_data)
     elif st.session_state.encryption_method == "FFHE":
         return decrypt_data_fhe(encrypted_data)
+
 
 def encrypt_data_fhe(data):
     return data
@@ -533,6 +536,7 @@ if nav_section == "Home":
                         st.info("No transactions to display.")
                 else:
                     st.error("Incorrect access code! Access denied.")
+
 # elif nav_section == "Higher Studies":
 #     st.header("🎓 Higher Studies Section")
 #     st.write("This section includes educational guidance for High School, PUC, Engineering, Finance, and MBBS students.")
@@ -869,6 +873,7 @@ elif nav_section == "Credential Encryption":
 
         st.write("Encrypted Credentials:")
         st.text(encrypted_credentials.decode())
+
 
 elif nav_section == "Logout":
     st.header("Logout")
