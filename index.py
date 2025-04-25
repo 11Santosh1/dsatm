@@ -346,6 +346,56 @@ st.write(f"Total Network Traffic: {network_traffic:.2f} MB")
 
 st.title("SAHAYOG – Integrating SDG with Education")
 st.write("Welcome to the platform where learning meets innovation for every rural student")
+
+# Add floating growing tree
+components.html("""
+<style>
+#tree-container {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    z-index: 9999;
+}
+#tree-img {
+    width: 150px; /* Fixed large size */
+    transition: opacity 0.6s ease-in-out;
+    cursor: pointer;
+}
+</style>
+
+<div id="tree-container">
+    <img id="tree-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.explicit.bing.net%2Fth%3Fid%3DOIP.grrBccEGYSMdW7ZE-WshkwHaF-%26cb%3Diwc1%26pid%3DApi&f=1&ipt=27d26934722166727a6e145b0a2021b610e4af5ce76d52f4706ec9230cd05fc9&ipo=images" alt="Tree" onclick="growTree()" />
+</div>
+
+<script>
+let grown = false;
+
+function growTree() {
+    if (grown) return;
+
+    const tree = document.getElementById("tree-img");
+
+    // Smooth fade transition
+    tree.style.opacity = 0;
+    setTimeout(() => {
+        tree.src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.lxt54IaUvOtGM97XFgCcEAHaE7%26pid%3DApi&f=1&ipt=6da0211b3bb71e94e748ec52d84e5c2a54262444076ea4ae0ae82735d5aaee09&ipo=images";
+        tree.style.opacity = 1;
+    }, 300);
+
+    grown = true;
+}
+
+// Automatically grow (change image) after 30 seconds
+setTimeout(growTree, 30000);
+</script>
+""", height=200)
+
+
+
+
+
+
+
 read_aloud_button()
 
 if "nav_section" not in st.session_state:
@@ -354,6 +404,8 @@ if "nav_section" not in st.session_state:
 
 def navigate_to(section):
     st.session_state.nav_section = section
+
+
 
 st.sidebar.markdown("<h2 style='text-align: center;'>🔍 Even those who are considered the most immoral of all sinners can cross over this ocean of material existence by seating themselves in the boat of divine knowledge.<br><br>Micro challenge:Can you name three ways you can reduce waste in your daily life starting today?</h2>", unsafe_allow_html=True)
 
