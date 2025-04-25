@@ -533,3 +533,340 @@ if nav_section == "Home":
                         st.info("No transactions to display.")
                 else:
                     st.error("Incorrect access code! Access denied.")
+# elif nav_section == "Higher Studies":
+#     st.header("🎓 Higher Studies Section")
+#     st.write("This section includes educational guidance for High School, PUC, Engineering, Finance, and MBBS students.")
+
+#     categories = ["High School", "PUC", "Engineering", "Finance", "MBBS"]
+#     selected_category = st.selectbox("Select Category", categories)
+
+#     user_question = st.text_input("Ask your question:")
+#     if st.button("Get Answer"):
+#         if user_question:
+#             with st.spinner("Thinking..."):
+#                 # Use your Gemini API call here
+#                 answer = get_gemini_response(user_question, selected_category)
+#                 st.success("Response:")
+#                 st.write(answer)
+#         else:
+#             st.warning("Please enter a question.")
+
+
+elif nav_section == "Primary":
+    if "page" not in st.session_state:
+        st.session_state.page = "primary"
+
+    if st.session_state.page == "primary":
+        st.header("Primary Section")
+        st.write("Welcome to the Primary Education Content Section.")
+
+        st.markdown("""
+        ### 🧠 Learn Basic Concepts
+        - **Alphabets** (A-Z)
+        - **Numbers** (1-100)
+        - **Colors & Shapes**
+        - **Basic Addition/Subtraction**
+
+        Use this space to make early learning fun and interactive.
+        """)
+
+       
+        st.title("📘 Primary Learning Zone")
+        st.markdown("### ✨ Choose a Language to Learn")
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.button("🔤 English"):
+                st.session_state.page = "english"
+
+            
+            
+        with col2:
+            if st.button("🌸 Kannada"):
+                st.session_state.page = "kannada"
+        with col3:
+            if st.button("🪔 Hindi"):
+                st.session_state.page = "hindi"
+
+        st.markdown("---")
+        if st.button("🔙 Back to Home"):
+            st.session_state.page = "home"
+
+    elif st.session_state.page == "english":
+        st.title("🔤 English Alphabet Learning")
+        st.markdown("### Click on a letter to learn how to write it")
+
+        letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        for i in range(0, len(letters), 6):
+            cols = st.columns(6)
+            for j, col in enumerate(cols):
+                if i + j < len(letters):
+                    letter = letters[i + j]
+                    if col.button(letter, use_container_width=True):
+                        st.session_state.selected_letter = letter
+
+        if "selected_letter" in st.session_state:
+            selected = st.session_state.selected_letter
+            if selected == "Q":
+                st.image(
+                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.makeagif.com%2Fmedia%2F8-17-2020%2FsR_V2n.gif&f=1&nofb=1&ipt=bdd72401bd797fc4aa9957d80a510da0da4fa2b064424d35475da49e77f15e70",
+                    caption="✍️ How to write 'Q'",
+                    use_column_width=True
+                )
+                st.subheader("🔊 Hear how 'A' sounds")
+                if st.button("▶️ Play Sound for Q"):
+                    audio_file = open("q.mp3", "rb")
+                    audio_bytes = audio_file.read()
+                    st.audio(audio_bytes, format="audio/mp3")
+            elif selected == "A":
+                st.image(
+                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.makeagif.com%2Fmedia%2F6-02-2021%2FJKYoCQ.gif&f=1&nofb=1&ipt=da40fea9b77b4660dc0b7eca024571f7ae6ba06e5e2e0fc50566fc49ceb0818b",
+                    caption="✍️ How to write 'A'",
+                    use_column_width=True
+                )
+                st.subheader("🔊 Hear how 'A' sounds")
+                if st.button("▶️ Play Sound for A"):
+                    audio_file = open("a.mp3", "rb")
+                    audio_bytes = audio_file.read()
+                    st.audio(audio_bytes, format="audio/mp3")
+
+                
+            else:
+                st.info(f"📝 Animation for letter '{selected}' not available yet.")
+
+        if st.button("🔙 Back to Primary"):
+            st.session_state.page = "primary"
+            st.session_state.selected_letter = None
+
+    elif st.session_state.page == "kannada":
+        st.title("🌸 Kannada Letters")
+        st.markdown("""
+        <div style='font-size: 56px; text-align: center; line-height: 2;'>
+            <strong>ಸ್ವರಗಳು (Vowels)</strong><br>
+            ಅ ಆ ಇ ಈ ಉ ಊ ಋ ೀ ಎ ಏ ಐ ಒ ಓ ಔ ಅಂ ಅಃ<br><br>
+            <strong>ವ್ಯಂಜನಗಳು (Consonants)</strong><br>
+            ಕ ಖ ಗ ಘ ಙ<br>
+            ಚ ಛ ಜ ಝ ಞ<br>
+            ಟ ಠ ಡ ಢ ಣ<br>
+            ತ ಥ ದ ಧ ನ<br>
+            ಪ ಫ ಬ ಭ ಮ<br>
+            ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ ಕ್ಷ ಜ್ಞ
+        </div>
+        """, unsafe_allow_html=True)
+
+        kannada_letter = st.selectbox("📚 Choose a Kannada letter to learn:", ["", "ಅ", "ಆ"])
+
+        if kannada_letter == "ಅ":
+            st.image(
+                "6b31f531f97a45998363f4f7425f4ade.gif",  # Example Kannada 'ಅ' writing gif
+                caption="✍️ How to write 'ಅ'",
+                use_column_width=True
+            )
+            st.subheader("🔊 Hear how 'ಅ' sounds")
+            if st.button("▶️ Play Sound for ಅ"):
+                audio_file = open("a_kannada.mp3", "rb")  # Ensure this file exists
+                audio_bytes = audio_file.read()
+                st.audio(audio_bytes, format="audio/mp3")
+
+        elif kannada_letter == "ಆ":
+            st.image(
+                "cc8bcca7f45442cc9aef9952cf9e449f.gif",  # Example Kannada 'ಆ' writing gif
+                caption="✍️ How to write 'ಆ'",
+                use_column_width=True
+            )
+            st.subheader("🔊 Hear how 'ಆ' sounds")
+            if st.button("▶️ Play Sound for ಆ"):
+                audio_file = open("aa_kannada.mp3", "rb")  # Ensure this file exists
+                audio_bytes = audio_file.read()
+                st.audio(audio_bytes, format="audio/mp3")
+
+        if st.button("🔙 Back to Primary"):
+            st.session_state.page = "primary"
+
+    elif st.session_state.page == "hindi":
+        st.title("🨔 Hindi Letters")
+        st.markdown("""
+        <div style='font-size: 48px; text-align: center; line-height: 2;'>
+            अ आ इ ई उ ऊ ऋ ए ऐ ओ औ अं अः<br>
+            क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण<br>
+            त थ द ध न प फ ब भ म य र ल व श ष स ह
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button("🔙 Back to Primary"):
+            st.session_state.page = "primary"
+
+
+
+
+
+elif nav_section == "Wallet":
+    st.header("Wallet")
+    st.write("Here you can view your total deposits and transaction history.")
+
+    total_deposit = sum([entry['amount'] for entry in st.session_state.wallet])
+    st.subheader(f"Total Deposited Amount: ₹ {total_deposit:.2f}")
+
+    if st.session_state.wallet:
+        st.write("### Deposit History")
+        for idx, entry in enumerate(st.session_state.wallet, 1):
+            st.write(f"{idx}. Amount: ₹{entry['amount']}, Date: {entry['timestamp']}")
+    else:
+        st.write("No deposits made yet.")
+
+elif nav_section == "FAQ's":
+    st.header("Heath and Hygiene")
+    st.write("""
+    1. Personal Hygiene – Bathe daily to keep your body clean and odor-free.
+
+2. Oral Hygiene – Brush twice a day and floss regularly to prevent tooth decay.
+
+3. Hand Hygiene – Wash hands before eating and after using the toilet.
+
+4. Nail Hygiene – Keep nails trimmed and clean to avoid germs and infections.
+
+5. Hair Care – Wash hair regularly to avoid lice and dandruff.
+
+6. Foot Hygiene – Clean feet daily and wear breathable shoes to prevent fungus.
+
+7. Clothing Hygiene – Wear clean clothes and change undergarments daily.
+
+8. Menstrual Hygiene – Use clean sanitary products and change them regularly.
+
+9. Toilet Hygiene – Always flush and wash hands after using the restroom.
+
+10. Food Hygiene – Eat fresh, well-cooked food and avoid uncovered street food.
+
+11. Water Hygiene – Drink clean, filtered or boiled water to prevent diseases.
+
+12. Home Hygiene – Keep living spaces clean, dust-free, and well-ventilated.
+
+13. Waste Management – Dispose of garbage properly and segregate waste.
+
+14. Sleep Hygiene – Maintain regular sleep patterns and get enough rest.
+
+15. Mental Hygiene – Practice stress management, meditation, and stay positive.
+    """)
+#upgraded
+elif nav_section == "Support":
+    st.header("Support")
+    st.write("For assistance with the platform, please contact us at the following:")
+    st.write("Email: support@secureplatform.com")
+    st.write("Phone: +1-234-567-890")
+    st.write("Our team is available 24/7 to assist you.")
+
+    user_input = st.radio("Choose a topic:", ("Investment", "Deposition"))
+
+    if user_input == "Investment":
+        st.write("""
+        **Investment** involves allocating money into financial instruments with the expectation of generating returns over time. Common investment options include stocks, bonds, real estate, and mutual funds. By investing, individuals aim to grow their wealth, achieve financial goals, and beat inflation. It's important to diversify investments and understand the associated risks. A well-planned investment strategy can help achieve long-term financial stability.
+        """)
+
+    elif user_input == "Deposition":
+        st.write("""
+        **Deposition** refers to the act of placing or depositing money into a secure account, such as a bank account or savings account. It allows individuals to safeguard their funds and earn interest over time. Depositing money is a safe way to preserve capital while earning a small return through interest. Deposits are generally low-risk investments, offering liquidity and security for the depositor's funds.
+        """)
+
+elif nav_section == "Withdraw":
+    st.header("Withdraw Funds")
+    st.write("Here, you can withdraw funds from your wallet.")
+
+    if st.session_state.wallet:
+        total_balance = sum([entry['amount'] for entry in st.session_state.wallet])
+        st.subheader(f"Available Balance: ₹ {total_balance:.2f}")
+
+        withdraw_amount = st.number_input("Enter Amount to Withdraw:", min_value=0.0, max_value=total_balance, step=0.01)
+
+        if st.button("Confirm Withdrawal"):
+            if withdraw_amount <= total_balance:
+                st.session_state.wallet.append({
+                    "amount": -withdraw_amount,
+                    "timestamp": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+                })
+                st.success(f"The amount will be delivered within 24 hours, Withdraw request added ₹ {withdraw_amount:.2f}. Remaining Balance: ₹ {total_balance - withdraw_amount:.2f}")
+            else:
+                st.error("Insufficient balance!")
+    else:
+        st.write("No funds available in your wallet.")
+
+
+elif nav_section == "Settings":
+    st.header("Settings")
+    st.write("Here, you can manage your account settings.")
+
+    encryption_method = st.radio(
+        "Select Encryption Method",
+        options=["HE", "FFHE"],
+        index=0 if st.session_state.encryption_method == "HE" else 1
+    )
+    if encryption_method != st.session_state.encryption_method:
+        st.session_state.encryption_method = encryption_method
+        st.success(f"Switched to {encryption_method} encryption method.")
+
+elif nav_section == "Graph Chart":
+    st.header("Transaction Chart")
+    st.write("Here is a graphical representation of transaction amounts over time.")
+
+    transaction_amounts = [float(transaction['transaction_amount']) for transaction in st.session_state.transaction_history]
+    transaction_times = [time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) for _ in st.session_state.transaction_history]
+
+    if transaction_amounts:
+        fig, ax = plt.subplots()
+        ax.bar(transaction_times, transaction_amounts, color='skyblue')
+        ax.set_xlabel('Date and Time')
+        ax.set_ylabel('Transaction Amount')
+        ax.set_title('Transaction Amounts Over Time')
+        st.pyplot(fig)
+    else:
+        st.write("No transactions to display in the graph.")
+
+elif nav_section == "Spending Analysis":
+    st.header("Spending Analysis")
+    st.write("Here, you can analyze your spending patterns.")
+
+    if st.session_state.wallet:
+        total_spent = sum([entry['amount'] for entry in st.session_state.wallet])
+        st.subheader(f"Total Spent: ₹ {total_spent:.2f}")
+
+        spending_distribution = [entry['amount'] for entry in st.session_state.wallet]
+        spending_labels = [f"Transaction {i+1}" for i in range(len(spending_distribution))]
+
+        fig, ax = plt.subplots()
+        ax.plot(spending_labels, spending_distribution, marker='o', color='orange', linestyle='-', linewidth=2)
+        ax.set_xlabel('Transaction')
+        ax.set_ylabel('Amount (₹)')
+        ax.set_title('Spending Distribution Over Time')
+        ax.grid(True)
+        st.pyplot(fig)
+
+        st.write("### Detailed Spending Table")
+        st.table(st.session_state.wallet)
+
+    else:
+        st.write("No spending data available.")
+
+elif nav_section == "Encrypted Data":
+    st.header("Encrypted Transaction Data")
+    st.write("Here is the encrypted data for each transaction.")
+
+    if st.session_state.encrypted_transactions:
+        for user_id, encrypted_data in st.session_state.encrypted_transactions.items():
+            st.write(f"**User ID:** {user_id}, Encrypted Amount: {encrypted_data.ciphertext()}")
+    else:
+        st.write("No encrypted transactions yet.")
+
+elif nav_section == "Credential Encryption":
+    st.header("Credential Encryption")
+    st.write("Upload a text file containing user credentials to encrypt them.")
+
+    uploaded_file = st.file_uploader("Upload Credential File", type=["txt"])
+
+    if uploaded_file:
+        content = uploaded_file.read().decode("utf-8")
+        key = Fernet.generate_key()  
+        cipher_suite = Fernet(key)
+        encrypted_credentials = cipher_suite.encrypt(content.encode())
+
+        st.write("Encrypted Credentials:")
+        st.text(encrypted_credentials.decode())
+
