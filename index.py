@@ -170,3 +170,125 @@ nav_labels = {
         "Logout": "ಲಾಗ್ ಔಟ್"
     }
 }
+labels = {
+    "English": {
+        "edu_advice": "📚 Get advice in specific education categories",
+        "choose_category": "Choose a Category:",
+        "ask_question": "Career Guidance / real time study evalution",
+        "get_answer": "Get Answer",
+        "warning": "Please enter a question.",
+        "generating": "Generating response...",
+        "answer": "Answer:"
+    },
+    
+    "ಕನ್ನಡ": {
+        "edu_advice": "📚 ನಿರ್ದಿಷ್ಟ ಶಿಕ್ಷಣ ವರ್ಗಗಳಲ್ಲಿ ಸಲಹೆ ಪಡೆಯಿರಿ",
+        "choose_category": "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+        "ask_question": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಕೇಳಿ:",
+        "get_answer": "ಉತ್ತರವನ್ನು ಪಡೆಯಿರಿ",
+        "warning": "ದಯವಿಟ್ಟು ಪ್ರಶ್ನೆಯನ್ನು ನಮೂದಿಸಿ.",
+        "generating": "ಉತ್ತರವನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ...",
+        "answer": "ಉತ್ತರ:"
+    },
+    "E-book": {
+    "edu_advice": "📘 ಇ-ಪುಸ್ತಕವನ್ನು ಓದಿ ಮತ್ತು ಕಲಿಯಿರಿ",
+    "choose_category": "ಇ-ಪುಸ್ತಕ ವಿಭಾಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+    "ask_question": "ಈ ಇ-ಪುಸ್ತಕ ಕುರಿತು ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಕೇಳಿ:",
+    "get_answer": "ಉತ್ತರ ಪಡೆಯಿರಿ",
+    "warning": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ನಮೂದಿಸಿ.",
+    "generating": "ಉತ್ತರವನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ...",
+    "answer": "ಉತ್ತರ:"
+    },
+    "Podcast": {
+    "edu_advice": "🎧 ಶೈಕ್ಷಣಿಕ ಪೋಡ್‌ಕಾಸ್ಟ್‌ಗಳನ್ನು ಕೇಳಿ",
+    "choose_category": "ಪೋಡ್‌ಕಾಸ್ಟ್ ವಿಭಾಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+    "ask_question": "ಈ ಪೋಡ್‌ಕಾಸ್ಟ್ ಕುರಿತು ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಕೇಳಿ:",
+    "get_answer": "ಉತ್ತರ ಪಡೆಯಿರಿ",
+    "warning": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ನಮೂದಿಸಿ.",
+    "generating": "ಉತ್ತರವನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ...",
+    "answer": "ಉತ್ತರ:"
+    }
+}
+
+if mode == "Science Chatbot for Kids":
+    if "science_chat" not in st.session_state:
+        st.session_state.science_chat = science_model.start_chat(history=[])
+
+   
+
+    # Show chat history
+    for msg in st.session_state.science_chat.history:
+        with st.chat_message("user" if msg.role == "user" else "assistant"):
+            st.markdown(msg.parts[0].text)
+
+    # Chat input
+    user_input = st.chat_input("Ask me anything science-y!")
+
+    if user_input:
+        with st.chat_message("user"):
+            st.markdown(user_input)
+
+        response = st.session_state.science_chat.send_message(user_input)
+
+        with st.chat_message("assistant"):
+            st.markdown(response.text)
+#added chats
+else:
+    st.subheader(labels[mode]["edu_advice"])
+
+    category = st.selectbox(labels[mode]["choose_category"], ["", "Primary", "High School", "PUC", "Engineering", "Finance", "MBBS"])
+    user_prompt = st.text_area(labels[mode]["ask_question"])
+
+    if st.button(labels[mode]["get_answer"]):
+        if not user_prompt.strip():
+            st.warning(labels[mode]["warning"])
+        else:
+            with st.spinner(labels[mode]["generating"]):
+                reply = get_gemini_response(user_prompt, category)
+                st.success(labels[mode]["answer"])
+                st.markdown(reply)
+
+
+if "public_key" not in st.session_state:
+    public_key, private_key = paillier.generate_paillier_keypair()
+    st.session_state.public_key = public_key
+    st.session_state.private_key = private_key
+
+if "encrypted_transactions" not in st.session_state:
+    st.session_state.encrypted_transactions = {}
+
+if "transaction_history" not in st.session_state:
+    st.session_state.transaction_history = []
+
+if "wallet" not in st.session_state:
+    st.session_state.wallet = []
+if "last_passkey_change_time" not in st.session_state:
+    st.session_state.last_passkey_change_time = time.time()
+#used timer sequence
+if "encryption_method" not in st.session_state:
+    st.session_state.encryption_method = "HE"
+
+if "user_authenticated" not in st.session_state:
+    st.session_state.user_authenticated = False
+
+if "user_id" not in st.session_state:
+    st.session_state.user_id = ""
+
+if "pan_no" not in st.session_state:
+    st.session_state.pan_no = ""
+
+
+def encrypt_data(data):
+    if st.session_state.encryption_method == "HE":
+        encrypted_data = st.session_state.public_key.encrypt(float(data))
+    elif st.session_state.encryption_method == "FFHE":
+        encrypted_data = encrypt_data_fhe(data)
+    return encrypted_data
+
+#added to states
+def decrypt_data(encrypted_data):
+    if st.session_state.encryption_method == "HE":
+        return st.session_state.private_key.decrypt(encrypted_data)
+    elif st.session_state.encryption_method == "FFHE":
+        return decrypt_data_fhe(encrypted_data)
+
