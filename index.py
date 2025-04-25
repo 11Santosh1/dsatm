@@ -870,3 +870,16 @@ elif nav_section == "Credential Encryption":
         st.write("Encrypted Credentials:")
         st.text(encrypted_credentials.decode())
 
+elif nav_section == "Logout":
+    st.header("Logout")
+    st.write("You have successfully logged out.")
+
+    st.session_state.user_authenticated = False
+    st.session_state.user_id = ""
+    st.session_state.pan_no = ""
+    st.session_state.encrypted_transactions = {}
+    st.session_state.transaction_history = []
+    st.session_state.wallet = []
+#all tabs done
+    
+#challenge completed
