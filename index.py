@@ -18,7 +18,7 @@ import base64
 GOOGLE_API_KEY = "AIzaSyDDmTosHLLulk4lId8Xj1LFBWh-OyjSci0"
 genai.configure(api_key=GOOGLE_API_KEY)
 
-# Model configurations
+# Model configuration
 generation_config = {
     "temperature": 0,
     "top_p": 0.95,
@@ -93,7 +93,7 @@ def get_gemini_response(prompt, category=None):
         return f"Error: {str(e)}"
 
 # Streamlit UI Setup
-st.set_page_config(page_title="SAHAYOGI", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="SAHAYOG", page_icon="🧠", layout="wide")
 
 
 # Mode selector
@@ -144,7 +144,7 @@ nav_labels = {
         "Primary": "Primary 'SDG'",
         "Higher Studies": "Higher Studies with 'SDG'",
         "Home": "Sustainable Finance",
-        "FAQ's": "FAQ's",
+        "FAQ's": "Earn SDG badge",
         "Support": "Support",
         "Settings": "Settings",
         "Graph Chart": "Graph Chart",
@@ -344,7 +344,7 @@ else:
 st.write(f"Total Network Traffic: {network_traffic:.2f} MB")
 
 
-st.title("SAHAYOGI – Integrating SDG with Education")
+st.title("SAHAYOG – Integrating SDG with Education")
 st.write("Welcome to the platform where learning meets innovation for every rural student")
 read_aloud_button()
 
@@ -355,7 +355,7 @@ if "nav_section" not in st.session_state:
 def navigate_to(section):
     st.session_state.nav_section = section
 
-st.sidebar.markdown("<h2 style='text-align: center;'>🔍 Even those who are considered the most immoral of all sinners can cross over this ocean of material existence by seating themselves in the boat of divine knowledge.<br><br>Micro challenge:Can you name five objects around you that start with the first five English letters?</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<h2 style='text-align: center;'>🔍 Even those who are considered the most immoral of all sinners can cross over this ocean of material existence by seating themselves in the boat of divine knowledge.<br><br>Micro challenge:Can you name three ways you can reduce waste in your daily life starting today?</h2>", unsafe_allow_html=True)
 
 st.markdown("## 🎙️ Speak to Ask a Question")
 
@@ -966,6 +966,15 @@ if nav_section == "FAQ's":
             st.experimental_rerun()
 
 #upgraded
+if "footprint_data" not in st.session_state:
+    st.session_state["footprint_data"] = {
+        "transport_km": 0,
+        "electricity_kwh": 0,
+        "meat_meals": 0,
+        "waste_kg": 0,
+        "water_liters": 0,
+    }
+
 elif nav_section == "Support":
     st.header("Support")
     st.write("For assistance with the platform, please contact us at the following:")
@@ -973,17 +982,81 @@ elif nav_section == "Support":
     st.write("Phone: +1-234-567-890")
     st.write("Our team is available 24/7 to assist you.")
 
-    user_input = st.radio("Choose a topic:", ("Investment", "Deposition"))
+    st.subheader("Carbon Footprint Tracker")
 
-    if user_input == "Investment":
-        st.write("""
-        **Investment** involves allocating money into financial instruments with the expectation of generating returns over time. Common investment options include stocks, bonds, real estate, and mutual funds. By investing, individuals aim to grow their wealth, achieve financial goals, and beat inflation. It's important to diversify investments and understand the associated risks. A well-planned investment strategy can help achieve long-term financial stability.
-        """)
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Transportation", "Electricity", "Diet", "Waste", "Water Usage"])
 
-    elif user_input == "Deposition":
-        st.write("""
-        **Deposition** refers to the act of placing or depositing money into a secure account, such as a bank account or savings account. It allows individuals to safeguard their funds and earn interest over time. Depositing money is a safe way to preserve capital while earning a small return through interest. Deposits are generally low-risk investments, offering liquidity and security for the depositor's funds.
-        """)
+    with tab1:
+        km = st.number_input("How many kilometers did you travel today (car/bike)?", min_value=0.0, step=0.1)
+        st.session_state.footprint_data["transport_km"] = km
+
+    with tab2:
+        kwh = st.number_input("How many kWh of electricity did you use today?", min_value=0.0, step=0.1)
+        st.session_state.footprint_data["electricity_kwh"] = kwh
+
+    with tab3:
+        meals = st.number_input("How many meat-based meals did you eat today?", min_value=0, step=1)
+        st.session_state.footprint_data["meat_meals"] = meals
+
+    with tab4:
+        waste = st.number_input("How much waste did you generate today (in kg)?", min_value=0.0, step=0.1)
+        st.session_state.footprint_data["waste_kg"] = waste
+
+    with tab5:
+        liters = st.number_input("How many liters of water did you use today?", min_value=0.0, step=1.0)
+        st.session_state.footprint_data["water_liters"] = liters
+
+    # Display Summary
+    st.subheader("📊 24-Hour Usage Summary")
+    st.write(f"🚗 **Transportation:** {st.session_state.footprint_data['transport_km']} km")
+    st.write(f"⚡ **Electricity:** {st.session_state.footprint_data['electricity_kwh']} kWh")
+    st.write(f"🍔 **Meat-based meals:** {st.session_state.footprint_data['meat_meals']}")
+    st.write(f"🗑️ **Waste:** {st.session_state.footprint_data['waste_kg']} kg")
+    st.write(f"🚿 **Water:** {st.session_state.footprint_data['water_liters']} liters")
+
+    # Suggestions based on inputs
+    st.subheader("💡 Suggestions to Reduce Your Carbon Footprint")
+
+    if st.session_state.footprint_data["transport_km"] > 20:
+        st.markdown("- Consider carpooling, biking, or using public transport for short trips.")
+    else:
+        st.markdown("- Great job keeping your travel minimal!")
+
+    if st.session_state.footprint_data["electricity_kwh"] > 10:
+        st.markdown("- Switch off unused appliances and try energy-efficient bulbs.")
+    else:
+        st.markdown("- Your electricity usage is within a good range!")
+
+    if st.session_state.footprint_data["meat_meals"] > 2:
+        st.markdown("- Try reducing meat consumption by adding plant-based meals.")
+    else:
+        st.markdown("- Balanced eating habits—keep it up!")
+
+    if st.session_state.footprint_data["waste_kg"] > 1:
+        st.markdown("- Reduce packaging waste and recycle regularly.")
+    else:
+        st.markdown("- Low waste generation—awesome!")
+
+    if st.session_state.footprint_data["water_liters"] > 150:
+        st.markdown("- Use low-flow faucets and be mindful during showers.")
+    else:
+        st.markdown("- You're using a responsible amount of water.")
+
+    # Final Points
+    st.subheader("🌍 Daily Eco-Points")
+    points = 0
+    if st.session_state["footprint_data"]["transport_km"] < 10:
+        points += 2
+    if st.session_state["footprint_data"]["electricity_kwh"] < 8:
+        points += 2
+    if st.session_state["footprint_data"]["meat_meals"] < 2:
+        points += 2
+    if st.session_state["footprint_data"]["waste_kg"] < 0.5:
+        points += 2
+    if st.session_state["footprint_data"]["water_liters"] < 100:
+        points += 2
+
+    st.success(f"🎯 You've earned **{points} / 10 Eco Points** today!")
 
 elif nav_section == "Withdraw":
     st.header("Withdraw Funds")
