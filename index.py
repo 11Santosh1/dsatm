@@ -14,6 +14,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.message import EmailMessage
 import base64
+import streamlit.components.v1 as components
 
 GOOGLE_API_KEY = "AIzaSyDDmTosHLLulk4lId8Xj1LFBWh-OyjSci0"
 genai.configure(api_key=GOOGLE_API_KEY)
@@ -153,7 +154,7 @@ nav_labels = {
         "Wallet": "Wallet",
         "Credential Encryption": "SDG News",
         "Withdraw": "Withdraw",
-        "Logout": "Logout"
+        "Logout": "SDG AR Experience"
     },
     "ಕನ್ನಡ": {
         "Primary": "ಪ್ರಾಥಮಿಕ",
@@ -1198,83 +1199,137 @@ elif nav_section == "Encrypted Data":
     else:
         st.write("No encrypted transactions yet.")
 
-import streamlit as st
-from cryptography.fernet import Fernet
 
 # Categories and news data
-categories = ["Nature", "Automobile", "Education", "Health", "Technology", "Energy"]
-if "selected_category" not in st.session_state:
-    st.session_state.selected_category = "Nature"
+elif nav_section == "SDG News":
+    # Categories and news data
+    categories = ["Nature", "Automobile", "Education", "Health", "Technology", "Energy"]
+    if "selected_category" not in st.session_state:
+        st.session_state.selected_category = "Nature"
 
-news_data = {
-    "Nature": [
-        {"title": "Amazon Rainforest Restoration Begins", "content": "Reforestation efforts are replanting over 1 million native trees in the Amazon to revive biodiversity."},
-        {"title": "Ocean Cleanup Nets Record Plastic", "content": "20 tons of ocean plastic removed in the Pacific using new sustainable nets."},
-        {"title": "Bee Populations Rebounding with Wildflower Corridors", "content": "Wildflower planting across farms is helping pollinators recover."},
-        {"title": "Coral Reefs See Recovery Signs", "content": "Certain areas in the Great Barrier Reef have shown 30% coral regrowth after climate adaptation steps."},
-        {"title": "Urban Forests Improve Air Quality", "content": "Cities adding green belts are seeing lower air pollution and better public health outcomes."},
-    ],
-    "Automobile": [
-        {"title": "EV Sales Outpace Gas in EU", "content": "Electric vehicles outsold gas-powered cars in several EU countries last quarter."},
-        {"title": "India Rolls Out E-Bike Highways", "content": "Dedicated highways for e-bikes aim to cut urban emissions."},
-        {"title": "Self-Charging Cars in Testing", "content": "Solar charging panels integrated into car hoods are showing promising mileage boosts."},
-        {"title": "Recycled Tires Now Standard in Green Cars", "content": "Tire manufacturers turn to fully recycled material for new electric cars."},
-        {"title": "Battery Recycling Plants Open in Asia", "content": "New tech allows lithium batteries to be reused more efficiently."},
-    ],
-    "Education": [
-        {"title": "SDG Curriculum in 1000 Schools", "content": "Rural schools get a sustainability-focused upgrade in classroom teaching."},
-        {"title": "Digital Literacy for Girls Program Launched", "content": "New initiative trains girls in rural areas on digital tools for school and life."},
-        {"title": "Mobile Libraries Reach Remote Villages", "content": "Books on wheels now deliver learning to mountain regions weekly."},
-        {"title": "AI Tutors Being Piloted in Low-Income Areas", "content": "AI is helping students catch up in regions with teacher shortages."},
-        {"title": "UNICEF Launches Climate Education App", "content": "New app lets children explore climate science through interactive games."},
-    ],
-    "Health": [
-        {"title": "AI Assistants in Village Clinics", "content": "AI-driven health assistants are deployed in rural health posts to assist diagnosis."},
-        {"title": "Free Sanitary Products in 300 Schools", "content": "Menstrual hygiene program launches in partnership with local health units."},
-        {"title": "Nutrition Campaigns Reduce Child Stunting", "content": "Awareness drives and food packs are improving child health indicators."},
-        {"title": "Telemedicine Vans Launched", "content": "Doctors can now reach remote patients via mobile consultation units."},
-        {"title": "Malaria Vaccine Trials Expand", "content": "Africa leads the way in a new malaria vaccine showing 70% success."},
-    ],
-    "Technology": [
-        {"title": "Blockchain for Transparent Aid", "content": "Aid organizations now track donations via blockchain to ensure zero corruption."},
-        {"title": "AI Waste Sorting Deployed in Cities", "content": "Smart bins separate trash using AI to improve recycling."},
-        {"title": "Low-Cost Solar Drones to Deliver Supplies", "content": "Startups build drones to drop essentials in disaster-hit villages."},
-        {"title": "Open-Source Climate Simulators Released", "content": "Free tools help students visualize climate change impacts in their regions."},
-        {"title": "Rural Internet Towers Installed", "content": "Off-grid towers powered by wind and sun connect isolated communities."},
-    ],
-    "Energy": [
-        {"title": "Wind Farms Expand Along Coast", "content": "New wind farms power 100,000 rural homes across India."},
-        {"title": "Affordable Solar Kits for Farmers", "content": "Irrigation pumps and grain mills now run on portable solar panels."},
-        {"title": "Bioenergy from Agricultural Waste Rising", "content": "Farm waste gets converted into clean-burning gas for home use."},
-        {"title": "India’s Largest Hydroelectric Plant Opens", "content": "Hydro project powers 3 states while reducing flood risks."},
-        {"title": "Community Energy Cooperatives Take Off", "content": "Villagers now co-own microgrids supplying renewable power locally."},
-    ]
-}
+    news_data = {
+        "Nature": [
+            {"title": "Amazon Rainforest Restoration Begins", "content": "Reforestation efforts are replanting over 1 million native trees in the Amazon to revive biodiversity."},
+            {"title": "Ocean Cleanup Nets Record Plastic", "content": "20 tons of ocean plastic removed in the Pacific using new sustainable nets."},
+            {"title": "Bee Populations Rebounding with Wildflower Corridors", "content": "Wildflower planting across farms is helping pollinators recover."},
+            {"title": "Coral Reefs See Recovery Signs", "content": "Certain areas in the Great Barrier Reef have shown 30% coral regrowth after climate adaptation steps."},
+            {"title": "Urban Forests Improve Air Quality", "content": "Cities adding green belts are seeing lower air pollution and better public health outcomes."},
+        ],
+        "Automobile": [
+            {"title": "EV Sales Outpace Gas in EU", "content": "Electric vehicles outsold gas-powered cars in several EU countries last quarter."},
+            {"title": "India Rolls Out E-Bike Highways", "content": "Dedicated highways for e-bikes aim to cut urban emissions."},
+            {"title": "Self-Charging Cars in Testing", "content": "Solar charging panels integrated into car hoods are showing promising mileage boosts."},
+            {"title": "Recycled Tires Now Standard in Green Cars", "content": "Tire manufacturers turn to fully recycled material for new electric cars."},
+            {"title": "Battery Recycling Plants Open in Asia", "content": "New tech allows lithium batteries to be reused more efficiently."},
+        ],
+        "Education": [
+            {"title": "SDG Curriculum in 1000 Schools", "content": "Rural schools get a sustainability-focused upgrade in classroom teaching."},
+            {"title": "Digital Literacy for Girls Program Launched", "content": "New initiative trains girls in rural areas on digital tools for school and life."},
+            {"title": "Mobile Libraries Reach Remote Villages", "content": "Books on wheels now deliver learning to mountain regions weekly."},
+            {"title": "AI Tutors Being Piloted in Low-Income Areas", "content": "AI is helping students catch up in regions with teacher shortages."},
+            {"title": "UNICEF Launches Climate Education App", "content": "New app lets children explore climate science through interactive games."},
+        ],
+        "Health": [
+            {"title": "AI Assistants in Village Clinics", "content": "AI-driven health assistants are deployed in rural health posts to assist diagnosis."},
+            {"title": "Free Sanitary Products in 300 Schools", "content": "Menstrual hygiene program launches in partnership with local health units."},
+            {"title": "Nutrition Campaigns Reduce Child Stunting", "content": "Awareness drives and food packs are improving child health indicators."},
+            {"title": "Telemedicine Vans Launched", "content": "Doctors can now reach remote patients via mobile consultation units."},
+            {"title": "Malaria Vaccine Trials Expand", "content": "Africa leads the way in a new malaria vaccine showing 70% success."},
+        ],
+        "Technology": [
+            {"title": "Blockchain for Transparent Aid", "content": "Aid organizations now track donations via blockchain to ensure zero corruption."},
+            {"title": "AI Waste Sorting Deployed in Cities", "content": "Smart bins separate trash using AI to improve recycling."},
+            {"title": "Low-Cost Solar Drones to Deliver Supplies", "content": "Startups build drones to drop essentials in disaster-hit villages."},
+            {"title": "Open-Source Climate Simulators Released", "content": "Free tools help students visualize climate change impacts in their regions."},
+            {"title": "Rural Internet Towers Installed", "content": "Off-grid towers powered by wind and sun connect isolated communities."},
+        ],
+        "Energy": [
+            {"title": "Wind Farms Expand Along Coast", "content": "New wind farms power 100,000 rural homes across India."},
+            {"title": "Affordable Solar Kits for Farmers", "content": "Irrigation pumps and grain mills now run on portable solar panels."},
+            {"title": "Bioenergy from Agricultural Waste Rising", "content": "Farm waste gets converted into clean-burning gas for home use."},
+            {"title": "India’s Largest Hydroelectric Plant Opens", "content": "Hydro project powers 3 states while reducing flood risks."},
+            {"title": "Community Energy Cooperatives Take Off", "content": "Villagers now co-own microgrids supplying renewable power locally."},
+        ]
+    }
 
-# Render category buttons
-cols = st.columns(len(categories))
-for i, category in enumerate(categories):
-    if cols[i].button(category):
-        st.session_state.selected_category = category
+    # Render category buttons
+    cols = st.columns(len(categories))
+    for i, category in enumerate(categories):
+        if cols[i].button(category):
+            st.session_state.selected_category = category
 
-# Show articles for selected category
-st.markdown(f"### 📰 {st.session_state.selected_category} News")
-for article in news_data[st.session_state.selected_category]:
-    with st.expander(article["title"]):
-        st.write(article["content"])
+    # Show articles for selected category
+    st.markdown(f"### 📰 {st.session_state.selected_category} News")
+    for article in news_data[st.session_state.selected_category]:
+        with st.expander(article["title"]):
+            st.write(article["content"])
 
 
 
-if nav_section == "Logout":
-    st.header("Logout")
-    st.write("You have successfully logged out.")
-
+elif nav_section == "Logout":
     st.session_state.user_authenticated = False
     st.session_state.user_id = ""
     st.session_state.pan_no = ""
     st.session_state.encrypted_transactions = {}
     st.session_state.transaction_history = []
     st.session_state.wallet = []
+
+    html_code = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Fake AR</title>
+      <style>
+        body, html {
+          margin: 0;
+          overflow: hidden;
+          background: black;
+        }
+        #camera {
+          position: fixed;
+          top: 0; left: 0;
+          width: 100vw;
+          height: 100vh;
+          object-fit: cover;
+          z-index: 0;
+        }
+        #overlayVideo {
+          position: fixed;
+          top: 20%;
+          left: 20%;
+          width: 60vw;
+          z-index: 1;
+          pointer-events: none;
+          border-radius: 12px;
+          box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+      </style>
+    </head>
+    <body>
+      <video id="camera" autoplay playsinline muted></video>
+      <video id="overlayVideo" autoplay loop muted>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+
+        Your browser does not support the video tag.
+      </video>
+
+      <script>
+        const camera = document.getElementById('camera');
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(stream => {
+            camera.srcObject = stream;
+          })
+          .catch(err => {
+            console.error("Camera access failed:", err);
+          });
+      </script>
+    </body>
+    </html>
+    """
+
+    st.markdown("### 🎥 AR Experience")
+    components.html(html_code, height=700, scrolling=False)
 #all tabs done
     
 #challenge completed
