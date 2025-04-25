@@ -1329,7 +1329,12 @@ elif nav_section == "Logout":
     """
 
     st.markdown("### 🎥 AR Experience")
+    st.markdown("""
+- 🥗 **Zero Hunger** – End hunger, achieve food security, and promote sustainable agriculture  
+- 🏥 **Good Health and Well-being** – Ensure healthy lives and promote well-being for all  
+- 🎓 **Quality Education** – Ensure inclusive and equitable education for all  
+- ♀️ **Gender Equality** – Achieve gender equality and empower all women and girls  
+- 🚰 **Clean Water and Sanitation** – Ensure availability and sustainable management of water and sanitation  
+- ⚡ **Affordable and Clean Energy** – Ensure access to sustainable and modern energy  
+""")
     components.html(html_code, height=700, scrolling=False)
-#all tabs done
-    
-#challenge completed
