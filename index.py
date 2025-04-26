@@ -1,4 +1,4 @@
-#for DSATM hackathon by team CODESMITH...Had a wonderfull experience
+#for DSATM hackathon by team CODESMITHS...Had a wonderfull experience
 import streamlit as st
 from phe import paillier
 import time
@@ -94,7 +94,7 @@ def get_gemini_response(prompt, category=None):
         return f"Error: {str(e)}"
 
 # Streamlit UI Setup
-st.set_page_config(page_title="SAHAYOG", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="SAHAYOGI", page_icon="🧠", layout="wide")
 
 
 # Mode selector
@@ -345,7 +345,7 @@ else:
 st.write(f"Total Network Traffic: {network_traffic:.2f} MB")
 
 
-st.title("SAHAYOG – Integrating SDG with Education")
+st.title("SAHAYOGI – Integrating SDG with Education")
 st.write("Welcome to the platform where learning meets innovation for every rural student")
 
 # Add floating growing tree
@@ -486,7 +486,7 @@ nav_map = {
     
     "Home": "Home",
     "FAQ's": "FAQ's",
-    "Support": "Carbon Footprint Tracker",
+    "Support": "Support",
     "Settings": "Settings",
     "Graph Chart": "Graph Chart",
     "Spending Analysis": "Spending Analysis",
@@ -1338,3 +1338,6 @@ elif nav_section == "Logout":
 - ⚡ **Affordable and Clean Energy** – Ensure access to sustainable and modern energy  
 """)
     components.html(html_code, height=700, scrolling=False)
+#all tabs done
+    
+#challenge completed
