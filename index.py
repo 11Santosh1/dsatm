@@ -1,4 +1,4 @@
-#for DSATM hackathon by team CODESMITHS...Had a wonderfull experience
+#for DSATM hackathon by team CODESMITH...Had a wonderfull experience
 import streamlit as st
 from phe import paillier
 import time
